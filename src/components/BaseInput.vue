@@ -18,11 +18,6 @@ export default {
   placeholder: String,
   modelValue: String,
   },  
-  methods: {
-    input(e){
-      console.log(e.target.value);
-    }
-  }
 }
 </script>
 

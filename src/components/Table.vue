@@ -14,8 +14,8 @@
         <td><BaseInput type="text" :placeholder="`${inData.remaining}`" /></td>
         <td><BaseInput type="text" :placeholder="`${inData.rate}`" /></td>
         <td>
-          <img :src="`${inData.img}`" v-if="inData.isShow==true">
-          <BaseButton @click="isOpened=true; isClicked=i">Detail</BaseButton>
+          <img :src="`${inData.img}`" v-show="inData.isShow==true">
+          <BaseButton @click.stop="isOpened=true; isClicked=i" v-show="inData.isShow==true">Detail</BaseButton>
           <Modal :isOpened="isOpened" @close="isOpened=false" :inDatas="inDatas" :isClicked="isClicked"/>
         </td>
       </tr>
@@ -33,8 +33,8 @@ export default {
   name: 'TheTable',
   data(){
     return {
-      isOpened: false,
-      isClicked: 0,
+      isOpened: false, //모달 열렸는지 여부
+      isClicked: 0, //열어 볼 모달번호
       title: ['Tablespace',	'Total capacity(MB)',	'Amount of use(MB)',	'Remaining capacity(MB)',	'Utilization rate of use rate(%)', 'image'],
       inDatas: [
         {
@@ -98,6 +98,7 @@ export default {
 
 * {
   box-sizing: border-box;
+  margin: 0;
 }
 
 .tbl-title {
@@ -108,11 +109,11 @@ export default {
   width: 100%;
   padding: 20px 5px;
   border-top: 1px solid #ddd;
-  cursor: pointer;
 }
 
 .tbl-list td {
-  height: 100px;
+  width: 150px;
+  height: 120px;
 }
 
 .tbl-list td:hover {
@@ -120,7 +121,10 @@ export default {
 }
 
 .tbl-list td:last-child {
-  width: 150px;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .tbl-list img {

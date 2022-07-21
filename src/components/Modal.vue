@@ -4,18 +4,19 @@
       <div class="modal-wrapper">
         <div class="modal-container">
           <div class="modal-header">
+            <h3>{{inDatas[isClicked].name}}</h3>
           </div>
-            {{inDatas[isClicked].name}}
+
           <div class="modal-body">
             <img :src="`${inDatas[isClicked].img}`"/>
+            <p>{{inDatas[isClicked].imgDescription}}</p>
           </div>
 
           <div class="modal-footer">
-              {{inDatas[isClicked].imgDescription}}
-              <BaseButton
-                class="modal-default-button"
-                @click="$emit('close')"
-              >OK</BaseButton>
+            <BaseButton
+              class="modal-default-button"
+              @click.stop="$emit('close')"
+            >OK</BaseButton>
           </div>
         </div>
       </div>
@@ -59,39 +60,27 @@ export default {
 }
 
 .modal-container {
-  width: 300px;
-  margin: 0px auto;
-  padding: 20px 30px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
   background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  border-radius: 10px;
   transition: all 0.3s ease;
 }
 
 .modal-header h3 {
-  margin-top: 0;
-  color: #42b983;
+  color: #027ed2;
 }
 
 .modal-body {
-  margin: 20px 0;
+  width: 100%;
+  padding: 30px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.modal-default-button {
-  float: right;
-}
-
-.modal-enter-from {
-  opacity: 0;
-}
-
-.modal-leave-to {
-  opacity: 0;
-}
-
-.modal-enter-from .modal-container,
-.modal-leave-to .modal-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-}
 </style>

@@ -1,9 +1,10 @@
 <template>
   <h3>로그인페이지</h3>
   <form v-on:submit.prevent class="loginBox" >
-      <BaseInput type="text" placeholder="Username"/>
-      {{username}}
-      <BaseInput type="password" placeholder="Password"/>
+      <BaseInput type="text" placeholder="Username" name="username"/>
+        {{username}}
+      <BaseInput type="password" placeholder="Password" name="password"/>
+        {{password}}
       <BaseButton @click="move('/table')">Login</BaseButton>
   </form>
 
