@@ -3,7 +3,7 @@
   <form class="loginBox" >
       <BaseInput type="text" placeholder="Username" v-model="username"/>
       <BaseInput type="password" placeholder="Password" v-model="password"/>
-      <BaseButton @click="doLogin"></BaseButton>
+      <BaseButton @click="move('/table')">Login</BaseButton>
   </form>
 
 </template>
@@ -22,12 +22,12 @@ export default {
     return {
       username: "",
       password: "",
-      
     }
   },
   methods: {
-    doLogin: function(){
-      // this.$router.push('/');
+    move(e){
+      this.$router.push(e);
+      console.log(`${e}`);
     }
   }
 }
