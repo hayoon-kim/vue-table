@@ -1,8 +1,9 @@
 <template>
   <h3>로그인페이지</h3>
-  <form class="loginBox" >
-      <BaseInput type="text" placeholder="Username" v-model="username"/>
-      <BaseInput type="password" placeholder="Password" v-model="password"/>
+  <form v-on:submit.prevent class="loginBox" >
+      <BaseInput type="text" placeholder="Username"/>
+      {{username}}
+      <BaseInput type="password" placeholder="Password"/>
       <BaseButton @click="move('/table')">Login</BaseButton>
   </form>
 
@@ -25,9 +26,9 @@ export default {
     }
   },
   methods: {
-    move(e){
-      this.$router.push(e);
-      console.log(`${e}`);
+    move(e){      
+        this.$router.push(e);
+        console.log(`${e}`);
     }
   }
 }

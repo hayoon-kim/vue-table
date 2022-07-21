@@ -4,7 +4,7 @@
       <input
         :type="type"
         :placeholder="placeholder"
-        @input="$emit('input', $event.target.value)"
+        :value="modelValue"
       >
     </label>
   </div>
@@ -15,7 +15,13 @@ export default {
   name: "BaseInput",
   props: {
   type: String,
-  placeholder: String
+  placeholder: String,
+  modelValue: String,
+  },  
+  methods: {
+    input(e){
+      console.log(e.target.value);
+    }
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
 
     <BaseButton @click="move('/login')">LoginPage</BaseButton>
-    <BaseButton @click="move('/table')">TheTable</BaseButton>
+    <!-- <BaseButton @click="move('/table')">TheTable</BaseButton> -->
 </template>
 
 <script>

@@ -1,5 +1,6 @@
 <template>
-  <button class="baseBtn" :type="type" >
+  <button class="baseBtn" >
+    <!-- buttontext in slot -->
     <slot></slot>
   </button>
 </template>
