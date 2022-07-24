@@ -1,11 +1,9 @@
 <template>
   <h3>로그인페이지</h3>
-  <form v-on:submit.prevent class="loginBox" >
-      <BaseInput type="text" placeholder="Username" name="username"/>
-        {{username}}
-      <BaseInput type="password" placeholder="Password" name="password"/>
-        {{password}}
-      <BaseButton @click="move('/table')">Login</BaseButton>
+  <form class="loginBox" @submit.prevent="handleSubmit">
+      <BaseInput v-model="username" type="email" placeholder="Username" name="username" required/>
+      <BaseInput v-model="password" type="password" placeholder="Password" name="password" required/>
+      <BaseButton type="submit">Login</BaseButton>
   </form>
 
 </template>
@@ -27,9 +25,13 @@ export default {
     }
   },
   methods: {
-    move(e){      
-        this.$router.push(e);
-        console.log(`${e}`);
+    handleSubmit(e){
+      e.preventDefault();
+      if( !this.username || !this.password ){
+        alert('로그인 정보를 입력해주세요.')
+      } else {
+        this.$router.push('/table');
+      }
     }
   }
 }

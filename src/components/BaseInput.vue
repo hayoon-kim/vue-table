@@ -5,6 +5,7 @@
         :type="type"
         :placeholder="placeholder"
         :value="modelValue"
+        @input="updateInput"
       >
     </label>
   </div>
@@ -18,6 +19,11 @@ export default {
   placeholder: String,
   modelValue: String,
   },  
+  methods: {
+    updateInput(e){
+      this.$emit("update:modelValue", e.target.value)
+    }
+  }
 }
 </script>
 

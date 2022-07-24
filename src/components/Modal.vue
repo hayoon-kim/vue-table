@@ -83,4 +83,8 @@ export default {
   align-items: center;
 }
 
+.modal-body img {
+  width: 40%;
+}
+
 </style>

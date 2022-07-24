@@ -14,27 +14,37 @@
         <td><BaseInput type="text" :placeholder="`${inData.remaining}`" /></td>
         <td><BaseInput type="text" :placeholder="`${inData.rate}`" /></td>
         <td>
-          <img :src="`${inData.img}`" v-show="inData.isShow==true">
+          <img :src="`${inData.img}`" v-show="inData.isShow==true" :alt="`tableimg${inData.id}`">
           <BaseButton @click.stop="isOpened=true; isClicked=i" v-show="inData.isShow==true">Detail</BaseButton>
-          <Modal :isOpened="isOpened" @close="isOpened=false" :inDatas="inDatas" :isClicked="isClicked"/>
         </td>
       </tr>
     </tbody>
   </table>
+
   <BaseButton>Save</BaseButton>
+  <!-- <Result /> -->
+  <Modal :isOpened="isOpened" @close="isOpened=false" :inDatas="inDatas" :isClicked="isClicked"/>
 </template>
 
 <script>
 import BaseButton from "./BaseButton.vue";
 import BaseInput from "./BaseInput.vue";
 import Modal from "./Modal.vue";
+// import Result from "./Result.vue"
 
 export default {
   name: 'TheTable',
   data(){
     return {
+      // name: "",
+      // total: "",
+      // amount: "",
+      // remaining: "",
+      // rate: "",
+      // img: "",
+      // imgDescription: "",
       isOpened: false, //모달 열렸는지 여부
-      isClicked: 0, //열어 볼 모달번호
+      isClicked: 0, //열어 볼 모달번호,
       title: ['Tablespace',	'Total capacity(MB)',	'Amount of use(MB)',	'Remaining capacity(MB)',	'Utilization rate of use rate(%)', 'image'],
       inDatas: [
         {
@@ -67,7 +77,7 @@ export default {
           "amount": "AMOUNTT",
           "remaining": "REMAININGG",
           "rate": "RATEE",
-          "img": "https://images.unsplash.com/photo-1519052537078-e6302a4968d4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGNhdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+          "img": "https://images.unsplash.com/photo-1517331156700-3c241d2b4d83?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1168&q=80",
           "imgDescription": "이미지3에 대한 설명입니다.",
         },
       ]
@@ -78,7 +88,6 @@ export default {
       console.log(e.name);
       console.log(e.isShow);
       console.log(e.id);
-      console.log('--------');
       e.isShow = !e.isShow;
     },
     modalOpen(){
@@ -89,6 +98,7 @@ export default {
     BaseButton: BaseButton,
     BaseInput: BaseInput,
     Modal: Modal,
+    // Result: Result,
 },
 }
 </script>
@@ -111,8 +121,12 @@ export default {
   border-top: 1px solid #ddd;
 }
 
+.tbl-list tr{
+  width: 100%;
+}
+
 .tbl-list td {
-  width: 150px;
+  width: 200px;
   height: 120px;
 }
 
@@ -121,7 +135,7 @@ export default {
 }
 
 .tbl-list td:last-child {
-
+  width: 100px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
