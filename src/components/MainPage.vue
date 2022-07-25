@@ -15,7 +15,7 @@ export default {
   methods: {
     move(e){
       this.$router.push(e);
-      console.log(`${e}`);
+      // console.log(`${e}`);
     }
   }
 }
