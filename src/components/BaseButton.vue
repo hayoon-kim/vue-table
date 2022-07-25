@@ -12,7 +12,7 @@ export default {
 </script>
 
 <style>
-  .baseBtn {
+  /* .baseBtn {
     width: 80px;
     height: 30px;
     color: white;
@@ -25,5 +25,5 @@ export default {
 
   .baseBtn:hover {
     transform: scale(1.05);
-  }
+  } */
 </style>

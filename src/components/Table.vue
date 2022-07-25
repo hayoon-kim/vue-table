@@ -7,15 +7,19 @@
       </th>
     </thead> 
     <tbody>
-      <tr v-for="(inData,i) in inDatas" :key="i" @click="test(inData)">
-        <td><BaseInput type="text" :placeholder="`${inData.name}`"/></td>
-        <td><BaseInput type="text" :placeholder="`${inData.total}`" /></td>
-        <td><BaseInput type="text" :placeholder="`${inData.amount}`" /></td>
-        <td><BaseInput type="text" :placeholder="`${inData.remaining}`" /></td>
-        <td><BaseInput type="text" :placeholder="`${inData.rate}`" /></td>
+      <tr v-for="(inData,i) in inDatas" :key="i" @click="test(inData,i)">
+        <td><BaseInput type="text" v-model="inData.name" :placeholder="`${inData.name}`"/></td>
+        <td><BaseInput type="text" v-model="inData.total" :placeholder="`${inData.total}`" /></td>
+        <td><BaseInput type="text" v-model="inData.amount" :placeholder="`${inData.amount}`" /></td>
+        <td><BaseInput type="text" v-model="inData.remaining" :placeholder="`${inData.remaining}`" /></td>
+        <td><BaseInput type="text" v-model="inData.rate" :placeholder="`${inData.rate}`" /></td>
         <td>
-          <img :src="`${inData.img}`" v-show="inData.isShow==true" :alt="`tableimg${inData.id}`">
-          <BaseButton @click.stop="isOpened=true; isClicked=i" v-show="inData.isShow==true">Detail</BaseButton>
+          <img :src="`${inData.img}`" 
+          v-if="isClicked===i" 
+          @click.stop="isOpened=true; isClicked=i"
+          :class="isShow==true? selected : ''"
+          :alt="`tableimg${inData.id}`">
+          <!-- <BaseButton @click.stop="isOpened=true; isClicked=i" v-show="inData.isShow==true">Detail</BaseButton> -->
         </td>
       </tr>
     </tbody>
@@ -44,6 +48,7 @@ export default {
       // rate: "",
       // img: "",
       // imgDescription: "",
+      selectData:{},
       isOpened: false, //모달 열렸는지 여부
       isClicked: 0, //열어 볼 모달번호,
       title: ['Tablespace',	'Total capacity(MB)',	'Amount of use(MB)',	'Remaining capacity(MB)',	'Utilization rate of use rate(%)', 'image'],
@@ -51,22 +56,26 @@ export default {
     }
   },
   methods: {
-    test(e){
-      console.log(e.name);
-      console.log(e.isShow);
-      console.log(e.id);
-      e.isShow = !e.isShow;
+    test(e,i){
+      // for(let i=0; i<this.inDatas.length; i++){
+      //   this.inDatas[i].isShow=false;
+      // }
+      // e.isShow=true;
+      this.selectData=e;
+      this.isClicked=i;
+      console.log(this.selectData,'셀렉트데이더')
     },
     modalOpen(){
       console.log(this);
-    }
+    },
   },
   components: {
     BaseButton: BaseButton,
     BaseInput: BaseInput,
     Modal: Modal,
     // Result: Result,
-},
+  },
+
 }
 </script>
 
@@ -88,7 +97,7 @@ export default {
   border-top: 1px solid #ddd;
 }
 
-.tbl-list tr{
+.tbl-list tr {
   width: 100%;
 }
 
@@ -106,6 +115,10 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.tbl-list td.selected {
+  background: red;
 }
 
 .tbl-list img {
