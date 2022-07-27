@@ -8,11 +8,11 @@
     </thead> 
     <tbody>
       <tr v-for="(inData,dataNum) in inDatas" :key="dataNum" @click="selectRow(inData,dataNum);" :class="isClicked==dataNum? 'selected':''">
-        <td><BaseInput type="text" v-model="inData.name" :placeholder="`${inData.name}`"/></td>
-        <td><BaseInput type="text" v-model="inData.total" :placeholder="`${inData.total}`" /></td>
-        <td><BaseInput type="text" v-model="inData.amount" :placeholder="`${inData.amount}`" /></td>
-        <td><BaseInput type="text" v-model="inData.remaining" :placeholder="`${inData.remaining}`" /></td>
-        <td><BaseInput type="text" v-model="inData.rate" :placeholder="`${inData.rate}`" /></td>
+        <td><BaseInput type="text" v-model="inData.name" :placeholder="`${inData.name}`" required/></td>
+        <td><BaseInput type="text" v-model="inData.total" :placeholder="`${inData.total}`" required/></td>
+        <td><BaseInput type="text" v-model="inData.amount" :placeholder="`${inData.amount}`" required/></td>
+        <td><BaseInput type="text" v-model="inData.remaining" :placeholder="`${inData.remaining}`" required/></td>
+        <td><BaseInput type="text" v-model="inData.rate" :placeholder="`${inData.rate}`" required/></td>
         <td>
           <img :src="`${inData.img}`" 
           @click.stop="isOpened=true; isClicked=dataNum"
@@ -24,8 +24,10 @@
     </tbody>
   </table>
   <!-- :disabled="!value 넣어야함 -->
-  <BaseButton>Save</BaseButton>
-  <Result :isClicked="isClicked" :inDatas="inDatas"/>
+  <BaseButton  :disabled="!inputCheck? true : false">Button</BaseButton> 
+  {{inputCheck}}
+  {{inputCheck? true : false}}
+  <Result :isClicked="isClicked" :inDatas="inDatas" :isOpened="isOpened"/>
 
   <!-- {{selectData}} -->
 
@@ -75,7 +77,7 @@ export default {
 </script>
 
 <script setup>
-import { ref, reactive } from 'vue';
+import { ref, reactive, computed } from 'vue';
 // import { useRouter } from 'vue-router';
 
 import BaseButton from "./BaseButton.vue";
@@ -93,13 +95,46 @@ import Result from "./Result.vue";
 
   //클릭한 데이터 가지고 오기.
   function selectRow(inData, dataNum){
-    console.log(inData);
-    console.log('데이터넘 '+dataNum);
-    console.log('이즈쇼 '+inData.isShow);
+    // console.log(inData);
+    // console.log('데이터넘 '+dataNum);
+    // console.log('이즈쇼 '+inData.isShow);
     isClicked.value = dataNum;
     selectData.value = inData;
   }
 
+// const handleButton=computed(function(){
+//   let v;
+//   for(let key in selectData.value){
+//     if(!selectData.value[key]){
+//       v=false;
+//     }else{
+//     v=true;
+//     }}
+//       return v;
+    
+
+//인풋들을 가지고 와서 input 안의 값이 하나라도 length < 1이면 true를 리턴, 아니면 false 리턴.
+const inputCheck = computed(()=>{
+  // let val;
+  // console.log('----------------');
+  // for(let key in selectData.value){
+  //   console.log(`${key}: ${selectData.value[key]}`);
+  //   console.log(`valuelength + ${selectData.value[key].length}`);
+  //   if(selectData.value[key] != null && selectData.value[key].length > 1){
+  //     val = false;
+  //   } else {
+  //     val = true;
+  //   }
+  // }
+  // for(let i; i<
+  return selectData.value?Object.values(selectData.value).filter(e=>!e):false;
+  // .length; i++){
+    // Object.values(selectData.value)[i].filtet(e=>!e).length
+  // }
+
+  // console.log(val);
+  // return val;
+})
 
 </script>
 

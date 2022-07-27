@@ -1,5 +1,5 @@
 <template>
-  <button class="baseBtn">
+  <button class="baseBtn" v-bind="$attrs">
     <!-- buttontext in slot -->
     <slot></slot>
   </button>
@@ -8,6 +8,8 @@
 <script>
 export default {
   name: "BaseButton",
+  
+  inheritAttrs: false
 }
 </script>
 

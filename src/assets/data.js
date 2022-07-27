@@ -1,6 +1,6 @@
 export default[
   {
-    isShow: true,
+    isShow: false,
     "id" : 0,
     "name": "KIM",
     "total": "TOTALL",
