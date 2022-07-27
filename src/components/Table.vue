@@ -25,8 +25,8 @@
   </table>
   <!-- :disabled="!value 넣어야함 -->
   <BaseButton  :disabled="!inputCheck? true : false">Button</BaseButton> 
-  {{inputCheck}}
-  {{inputCheck? true : false}}
+  <!-- {{inputCheck}}
+  {{inputCheck? true : false}} -->
   <Result :isClicked="isClicked" :inDatas="inDatas" :isOpened="isOpened"/>
 
   <!-- {{selectData}} -->
@@ -126,11 +126,12 @@ const inputCheck = computed(()=>{
   //     val = true;
   //   }
   // }
-  // for(let i; i<
-  return selectData.value?Object.values(selectData.value).filter(e=>!e):false;
-  // .length; i++){
-    // Object.values(selectData.value)[i].filtet(e=>!e).length
-  // }
+
+  return selectData.value
+
+    ? Object.values(selectData.value).every((e) => e !== '')
+
+    : false;
 
   // console.log(val);
   // return val;
